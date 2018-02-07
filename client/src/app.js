@@ -1,11 +1,36 @@
 const BucketlistData = require("./models/bucketlistData.js");
 const BucketlistView = require("./views/bucketlistView.js");
 
+
+
+
+const createButtonClicked = function(event){
+  event.preventDefault();
+  console.log("form submit clicked");
+  const countryInputValue = document.querySelector('#countries').value;
+
+  const body = {
+    country: countryInputValue
+  };
+
+  const createRequestComplete = function(country){
+  console.log("added");
+  }
+
+request.post(createRequestComplete, body);
+
+};
+
+
+
+
 const app = function () {
   const bucketlistData = new BucketlistData("http://localhost:5000/api/bucketlist")
   const bucketlistView = new BucketlistView(document.querySelector("#bucketlist-list"))
   bucketlistData.onLoad = bucketlistView.render;
   bucketlistData.getData();
+
+
 
   window.addEventListener('load', function() {
     var url = 'https://restcountries.eu/rest/v2';
@@ -32,7 +57,7 @@ const app = function () {
 
     if(storedCountry) {
       countryToBeDisplayed = JSON.parse(storedCountry);
-      var select = document.querySelector('countries');
+      var select = document.querySelector('#countries');
       select.selectedIndex = countryToBeDisplayed.index;
     }
     else {
@@ -63,16 +88,22 @@ const app = function () {
       var jsonString = JSON.stringify(country);
       localStorage.setItem('selectedCountry', jsonString);
     });
+
+  
   }
 
   var updateInfo = function (country) {
     var pTags = document.querySelectorAll('#info p');
-    pTags[0].innerText = country.name;
-    pTags[1].innerText = country.population;
-    pTags[2].innerText = country.capital;
+    pTags[0].innerText = `Country: ${country.name}`;
+    pTags[1].innerText = `Region: ${country.region}`;
+    pTags[2].innerText = `Capital: ${country.capital}`;
   }
 
+  const createAddButton = document.querySelector('#add-country');
+  createAddButton.addEventListener('click', createButtonClicked);
+
 }
+
 
 
 
