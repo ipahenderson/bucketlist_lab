@@ -31,7 +31,7 @@ const app = function () {
     var countryToBeDisplayed = null;
 
     if(storedCountry) {
-      countryToBeDisplayed = JSON,parse(storedCountry);
+      countryToBeDisplayed = JSON.parse(storedCountry);
       var select = document.querySelector('countries');
       select.selectedIndex = countryToBeDisplayed.index;
     }
