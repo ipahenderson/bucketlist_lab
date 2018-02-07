@@ -3,7 +3,7 @@ const BucketlistView = function(container){
 }
 
 BucketlistView.prototype.render = function(data){
-  console.log("Rendering ", data, this.container);
+  // console.log("Rendering ", data, this.container);
   const ul = document.querySelector('#bucketlist-list');
   for (item of data){
   const li = document.createElement('li');
